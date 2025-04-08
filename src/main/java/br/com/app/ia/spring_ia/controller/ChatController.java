@@ -6,16 +6,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class GenerativeAiController {
+public class ChatController {
 
     private final ChatService service;
 
-    public GenerativeAiController(ChatService service) {
+    public ChatController(ChatService service) {
         this.service = service;
     }
 
     @GetMapping("ask-ai")
     public String getResponse(@RequestParam String prompt) {
+
         return service.getResponse(prompt);
+    }
+
+    @GetMapping("ask-ai-options")
+    public String getResponseWithOptions(@RequestParam String prompt) {
+
+        return service.getResponseWithOptions(prompt);
     }
 }
