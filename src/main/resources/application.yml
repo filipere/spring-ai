@@ -1,7 +1,0 @@
-server:
-  port: "${MS_PORT:8081}"
-
-spring:
-  ai:
-    openai:
-      api-key: ${OPEN_AI_API_KEY}
