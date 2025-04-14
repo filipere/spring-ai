@@ -9,7 +9,6 @@ function TalkWithAI() {
     const AskAi = async () => {
 
         try {
-            // {{http://localhost:8081/ai/ask-ai-options?prompt=Qual é a capital da Indonesia?
             const response = await api.get(`ask-ai-options`, {
                 params: { prompt }
             })

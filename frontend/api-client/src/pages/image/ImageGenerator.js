@@ -29,8 +29,6 @@ function ImageGenerator() {
         }
     }
 
-
-    //{{http://localhost:8081/generate-image?prompt=bird}}
     return (
         <div>
             <h2>Gerador de imagens</h2>
