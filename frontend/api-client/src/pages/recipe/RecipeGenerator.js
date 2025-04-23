@@ -7,6 +7,10 @@ function RecipeGenerator() {
     const [cuisine, setCuisine] = useState('Any');
     const [dietaryRestrictions, setDietaryRestrictions] = useState('');
 
+    const [downloadResponse, setDownloadResponse] = useState('');
+    const [fileName, setFileName] = useState('');
+    const [servico, setServico] = useState('');
+
     const [recipe, setRecipe] = useState('');
 
     const createRecipe = async () => {
@@ -24,6 +28,29 @@ function RecipeGenerator() {
             console.log("Error generate recipe: ", error);
         }
     }
+
+    const handleDownload = async () => {
+        try {
+            const url = `http://localhost:8081/ai/download/receita`;
+            const response = await fetch(url);
+    
+            if (!response.ok) {
+                throw new Error("Erro ao baixar o arquivo");
+            }
+    
+            const blob = await response.blob();
+            const downloadUrl = window.URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = downloadUrl;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            window.URL.revokeObjectURL(downloadUrl);
+        } catch (error) {
+            console.error("Erro ao realizar download:", error);
+        }
+    };
 
     return (
         <div>
@@ -50,6 +77,10 @@ function RecipeGenerator() {
             <button onClick={createRecipe}>Gerar receita</button>
             <div className="outPut">
                 <ReactMarkDown>{recipe}</ReactMarkDown>
+            </div>
+            <button onClick={handleDownload}>Download</button>
+            <div className="outPut">
+                <p>{downloadResponse}</p>
             </div>
         </div>
     )

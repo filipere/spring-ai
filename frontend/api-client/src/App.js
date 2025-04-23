@@ -21,17 +21,17 @@ function App() {
       <button
         className={activeTab === 'ask-ai' ? 'active': ''}
         onClick={() => handleTabChange('ask-ai')}>
-          Talk with AI
+          Pergunte a IA
       </button>
       <button 
         className={activeTab === 'recipe-generator' ? 'active': ''}
         onClick={() => handleTabChange('recipe-generator')}>
-          Generate Recipes
+          Gerador de Receitas
       </button>
       <button
         className={activeTab === 'image-generator' ? 'active': ''}
         onClick={() => handleTabChange('image-generator')}>
-          Generate Images
+          Gerador de Imagens
       </button>
       <div>
         {activeTab === 'ask-ai' && <TalkWithAI/>}

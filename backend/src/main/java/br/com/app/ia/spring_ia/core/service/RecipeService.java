@@ -1,5 +1,6 @@
 package br.com.app.ia.spring_ia.core.service;
 
+import br.com.app.ia.spring_ia.utils.FileUtils;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
@@ -35,6 +36,14 @@ public class RecipeService {
                 );
 
         Prompt prompt = promptTemplate.create(params);
-        return chatModel.call(prompt).getResult().getOutput().getText();
+        String response = chatModel.call(prompt).getResult().getOutput().getText();
+
+        String conteudoFinal = "Prompt enviado:\n" + prompt.getContents() +
+                "\n\nResposta recebida:\n" + response;
+
+
+        FileUtils.salvarEmArquivo(response, "receita");
+
+        return response;
     }
 }

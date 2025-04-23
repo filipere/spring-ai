@@ -1,5 +1,6 @@
 package br.com.app.ia.spring_ia.core.service;
 
+import br.com.app.ia.spring_ia.utils.FileUtils;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
@@ -17,8 +18,9 @@ public class ChatService {
     }
 
     public String getResponse(String prompt) {
-
-        return chatModel.call(prompt);
+        String resposta = chatModel.call(prompt);
+        FileUtils.salvarEmArquivo(resposta, "chat_simples"); // ou qualquer outro nome descritivo
+        return resposta;
     }
 
     public String getResponseWithOptions(String prompt) {
@@ -30,6 +32,8 @@ public class ChatService {
                                 .temperature(0.4)
                                 .build()
                 ));
-        return response.getResult().getOutput().getText();
+        String resposta = response.getResult().getOutput().getText();
+        FileUtils.salvarEmArquivo(resposta, "chat_options"); // nome descritivo
+        return resposta;
     }
 }
